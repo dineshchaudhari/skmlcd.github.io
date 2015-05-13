@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset=utf-8>
+	<meta name=description content="Lorem ipsum">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<title>Lorem Ipsum</title>
+</head>
+<body>
+<div id="panel">
+	<h3>Domen Skamlič</h3>
+	<div id="profile_pic"> </div>
+	<div id="about">I’m a software developer, dealing mostly with Android application development, web technologies and system administration.</div>
+	<ul id="menu">
+	    <li class="selected">Blog</li>
+	    	<ul class="submenu">
+		        <li>lorem ipsum lorem ipsum</li>
+		        <li>lorem ipsum lorem ipsum</li>
+		        <li>lorem ipsum lorem ipsum</li>
+		        <li>lorem ipsum lorem ipsum</li>
+		        <li>lorem ipsum lorem ipsum</li>
+		        &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Show the article archive.</a>
+		    </ul>
+	    <li>Projects</li>
+	    <li>Résumé </li>
+	</ul>
+
+	<ul id="profiles">
+	    <li class="github_profile">GitHub profile</li>
+	    <li class="stackoverflow">Stack Overflow</li>
+	</ul>
+</div>
+<div id="wrapper">
+	<h1>Lorem ownership, the hard way</h1>
+	<div class="date_tags">
+		<span class="date">Posted: May 12, 2015</span><span class="tags">Tags: Lorem</span>
+	</div>
+
+
+	<div class="info"><span class="info_title">i<br>n<br>f<br>o</span>This article is written for Lorem 1.0.0. All the information contained has been correct since before 1.0.0-beta and is expected to remain true indefinitely unless otherwise noted. This article is written for Lorem 1.0.0. All the information contained has been correct since before 1.0.0-beta and is expected to remain true indefinitely unless otherwise noted. This article is written for Lorem 1.0.0. All the information contained has been correct since before 1.0.0-beta and is expected to remain true indefinitely unless otherwise noted. This article is written for Lorem 1.0.0. All the information contained has been correct since before 1.0.0-beta and is expected to remain true indefinitely unless otherwise noted. This article is written for Lorem 1.0.0. All the information contained has been correct since before 1.0.0-beta and is expected to remain true indefinitely unless otherwise noted.</div>
+
+	<p>In order to truly understand Lorem, one needs to understand its crucial differentiating feature: ownership. Let’s go through it in detail the hard way.</p>
+
+	<p>This article is an introduction to Lorem’s concept of ownership. It’s designed for someone who is already a programmer but who is not especially familiar (maybe even not at all familiar) with Lorem. It doesn’t attempt to explain all the concepts it deals with, but for the most part it should be clear enough. If you’re a beginner you may also find that you don’t understand various parts of it; in such a case, you might like to hold the article while you go and learn more about them elsewhere; you’ll find more value in coming back to this article after.</p>
+
+	<p>This concept of ownership is the pivotal part of Lorem; it’s the part that makes its combination of efficiency and safety possible. While the rest of Lorem is pretty similar to what you’ll find in mainstream languages, these concepts of ownership and lifetimes are different from anything in any mainstream language, so it’s likely to be the part that you’ll spend the longest trying to grok; if you don’t give up but persist, then when it all clicks, working in Lorem will be a joy, and you’ll have unlocked a marvellous ability to reason about code. You’ll also probably wish you could transplant a lot of the aspects of Lorem’s ownership model to other languages you deal with.</p>
+
+	<p>This article deals with the concepts and theory of ownership and lifetimes; it doesn’t provide much in the way of practical usage examples; those you can find elsewhere. But it does explain all the rules that go to make Lorem’s ownership model what it is. (It is called “the hard way” for a reason.)</p>
+
+	<h2>Each object can be used exactly once. When you use an object it is moved to the new location and is no longer usable in the old.</h2>
+
+	<p><a href="#">Later on</a> we’ll deal with a couple of features that make this model more palatable, but for now we’ll skip them, considering it at the most basic level.</p>
+
+	<div class="code">
+		struct A;<br>
+ 
+		fn main() {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;let a = A;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;let b = a;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;let c = a;<br>
+		}
+	</div>
+
+	<div class="code">
+		<anon>:6:9: 6:10 error: use of moved value: `a`<br>
+		<anon>:6&nbsp;&nbsp;&nbsp;&nbsp; let c = a;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br>
+		<anon>:5:9: 5:10 note: `a` moved here because it has type `A`, which is moved by default<br>
+		<anon>:5&nbsp;&nbsp;&nbsp;&nbsp; let b = a;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br>
+		<anon>:5:10: 5:10 help: use `ref` to override<br>
+		error: aborting due to previous error
+	</div>
+
+	<p>The A instance placed in the slot a is moved to b, rendering a unusable.</p>
+
+	<h2>When an object passes out of scope, it is destroyed and is no longer usable.</h2>
+
+	<p>All curly braces (known as blocks) introduce a new level of scope, and anything declared inside a block (e.g. the binding x in let x = y;) will live until the end of that block.</p>
+
+	<div class="code">
+		struct A;<br>
+ 
+		fn main() {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;let a = A;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;let b = a;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;let c = a;<br>
+		}
+	</div>
+
+	<div class="code">
+		<anon>:6:9: 6:10 error: use of moved value: `a`<br>
+		<anon>:6&nbsp;&nbsp;&nbsp;&nbsp; let c = a;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br>
+		<anon>:5:9: 5:10 note: `a` moved here because it has type `A`, which is moved by default<br>
+		<anon>:5&nbsp;&nbsp;&nbsp;&nbsp; let b = a;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br>
+		<anon>:5:10: 5:10 help: use `ref` to override<br>
+		error: aborting due to previous error
+	</div>
+
+	<p>Lorem Ipsum is awesome.</p>
+
+	<div id="foot">
+		<span class="next_post">&#171; Next post</span>
+		Back to list
+		<span class="previous_post">Previous post &#187;</span>
+	</div>
+
+</div>
+</body>
+</html>
