@@ -23,6 +23,11 @@ h2 {
 p {
 	margin-top: 15px;
 	line-height: 25px;
+	text-align: justify;
+}
+article img {
+	float: right;
+	padding: 0 0 0 15px;
 }
 
 a {
@@ -56,19 +61,44 @@ li {
 	padding-bottom: 15px;
 }
 .submenu li {
-	margin: 0 0 10px 35px;
+	margin: 0 0 10px 20px;
 	padding: 0 !important;
 	font: normal 18px Arial, sans-serif;
+	list-style-position:inside;
 	list-style-type: disc;
 	background-color: #f1f2f3 !important;
 	border: none !important;
+}
+.submenu li:hover {
+	list-style-type: circle;
+}
+.submenu li div {
+	max-width: 240px !important;
+	white-space: nowrap;
+	overflow: hidden !important;
+	text-overflow: ellipsis;
+}
+.submenu li a:link {
+	text-decoration: none;
+	color: #202020;
+}
+.submenu li a:visited {
+	text-decoration: none;
+	color: #202020;
 }
 
 #profiles li {
 	background-color: #f1f2f3; /* #e3e8ee */
 	border: none; /* 1px solid #acc3db */
 	margin: 5px;
-	cursor: pointer;
+}
+#profiles a:link {
+	text-decoration: none;
+	color: #202020;
+}
+#profiles a:visited {
+	text-decoration: none;
+	color: #202020;
 }
 
 .selected {
@@ -79,11 +109,11 @@ li {
 
 .github_profile {
 	background: url(img/github.png) left center no-repeat;
-	padding: 12px 0 8px 40px; 
+	padding: 11px 0 8px 40px; 
 }
 .stackoverflow {	
 	background: url(img/stack.png) left center no-repeat;
-	padding: 12px 0 8px 40px; 
+	padding: 11px 0 8px 40px; 
 }
 
 
@@ -150,11 +180,13 @@ h3 {
 	margin-top: 15px;
 	border-radius: 4px;
 	text-align: justify;
+	min-height: 85px;
 }
 .info_title {
 	position: relative;
 	float: left;
-	left: -32px;
+	left: 8px;
+	bottom: -25px;
 	color: #fff;
 	font: bold 18px monospace;
 }
@@ -186,6 +218,12 @@ h3 {
 }
 
 
+@media only screen and (max-width : 600px) {
+	article img {
+		float: none;
+		padding: 0;
+	}
+}
 
 @media only screen and (max-width : 1365px) {
 	#panel {
